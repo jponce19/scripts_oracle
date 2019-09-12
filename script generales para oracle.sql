@@ -12,3 +12,21 @@ GRANT CONNECT, RESOURCE, DBA TO user_app_demo;
 commit
 
 
+// recorrer un sp 
+declare
+  v sys_refcursor;
+  vidusuario     tbl_usuarios.usuario_id%type;
+  vnombreusuario tbl_usuarios.usuario_nombre%type;
+
+begin
+  sp_listarusuario(vrecordset => v);
+
+  loop
+    fetch v into vidusuario, vnombreusuario;
+    exit when v%notfound;
+    dbms_output.put_line(vidusuario ||' ' || vnombreusuario );  
+  end loop;
+  close v;
+end;
+
+
