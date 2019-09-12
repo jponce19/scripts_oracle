@@ -29,4 +29,22 @@ begin
   close v;
 end;
 
-
+// recorer tabla oracle
+declare
+  type xregistro  is ref cursor return tbl_usuarios%rowtype;
+  vidusuario      tbl_usuarios.usuario_id%type;
+  vnombreusuario  tbl_usuarios.usuario_nombre%type; 
+  
+  cursor usuarios is select * from tbl_usuarios;
+  
+begin
+  
+      for u in usuarios 
+      loop
+       dbms_output.put_line(u.usuario_id ||' ' || u.usuario_nombre );  
+      end loop;        
+    
+  
+    
+  
+end;
